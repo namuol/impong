@@ -14,7 +14,7 @@ server = (cb) ->
   express = require("express")
   impact = require("impact-weltmeister")
   port = 8080
-  root = __dirname + "/build"
+  root = __dirname + "/build/"
   app = express()
   app.configure ->
     app.use express.methodOverride()
