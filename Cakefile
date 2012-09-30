@@ -21,7 +21,7 @@ task 'build', 'Create compiled HTML/CSS output', ->
   exec 'coffee -c -o build/lib/game/ src/main.coffee'
 
   console.log 'building index...'
-  result = ck.render fs.readFileSync 'src/index.coffee', 'utf-8'
+  result = ck.render fs.readFileSync 'src/index.ccup', 'utf-8'
   fs.writeFileSync 'build/index.html', result
 
   console.log 'building css...'

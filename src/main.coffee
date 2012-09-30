@@ -5,6 +5,8 @@ ig.module("game.main")
     font: new ig.Font("media/04b03.font.png")
     init: ->
       # Initialize your game here; bind keys etc.
+      ig.input.bind ig.KEY_UP_ARROW, 'up'
+      ig.input.bind ig.KEY_DOWN_ARROW, 'down'
 
     update: ->
 
