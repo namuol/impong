@@ -9,8 +9,8 @@ ig.module(
       puck = ig.game.getEntitiesByType(EntityPuck)[0]
 
       if puck.pos.y + puck.size.y/2 > @pos.y + @pos.y/2
-        @vel.y = 100
+        @ay = 1
       else
-        @vel.y = -100
+        @ay = -1
 
       @parent()

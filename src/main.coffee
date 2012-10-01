@@ -15,8 +15,11 @@ ig.module(
     font: new ig.Font('media/04b03.font.png')
     init: ->
       # Initialize your game here; bind keys etc.
-      ig.input.bind ig.KEY.UP_ARROW, 'up'
-      ig.input.bind ig.KEY.DOWN_ARROW, 'down'
+      ig.input.bind ig.KEY.W, 'p1up'
+      ig.input.bind ig.KEY.S, 'p1down'
+
+      ig.input.bind ig.KEY.UP_ARROW, 'p2up'
+      ig.input.bind ig.KEY.DOWN_ARROW, 'p2down'
 
       @loadLevel LevelMain
 
@@ -25,6 +28,9 @@ ig.module(
       @parent()
 
       # Add your own, additional update code here
+      @screen =
+        x: 0
+        y: 16
 
     draw: ->
       # Draw all entities and backgroundMaps
@@ -32,4 +38,5 @@ ig.module(
       
       # Add your own drawing code here
  
-  ig.main '#canvas', MyGame, 60, 256, 160, 3
+  ig.System.drawMode = ig.System.DRAW.AUTHENTIC
+  ig.main '#canvas', MyGame, 30, 256, 160, 3
