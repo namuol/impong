@@ -22,6 +22,7 @@ ig.module(
       ig.input.bind ig.KEY.DOWN_ARROW, 'p2down'
 
       @loadLevel LevelMain
+      ig.input.initMouse()
 
     update: ->
       # Update all entities and backgroundMaps
