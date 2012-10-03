@@ -4,6 +4,7 @@ fs = require 'fs'
 ck = require 'coffeecup'
 stylus = require 'stylus'
 {exec} = require 'child_process'
+build_dir = 'impact'
 
 handle_errors = (err, stdout, stderr) ->
   if err
@@ -14,7 +15,7 @@ server = (cb) ->
   express = require("express")
   impact = require("impact-weltmeister")
   port = 8080
-  root = __dirname + "/build/"
+  root = __dirname + "/#{build_dir}/"
   app = express()
   app.configure ->
     app.use express.methodOverride()
@@ -36,20 +37,20 @@ task 'build', 'Create compiled HTML/CSS output', ->
   console.log 'building entities...'
   for f in fs.readdirSync 'src/entities'
     console.log '  ' + f
-    exec 'coffee -c -o build/lib/game/entities src/entities/' + f, handle_errors
+    exec "coffee -c -o #{build_dir}/lib/game/entities src/entities/" + f, handle_errors
 
   console.log 'building main...'
-  exec 'coffee -c -o build/lib/game/ src/main.coffee', handle_errors
+  exec "coffee -c -o #{build_dir}/lib/game/ src/main.coffee", handle_errors
 
   console.log 'building index...'
   result = ck.render fs.readFileSync 'src/index.ccup', 'utf-8'
-  fs.writeFileSync 'build/index.html', result
+  fs.writeFileSync "#{build_dir}/index.html", result
 
   console.log 'building css...'
   stylus.render fs.readFileSync('src/style.styl','utf-8'),
     filename: 'style.css'
   , (err, css) ->
-    fs.writeFileSync 'build/style.css', css
+    fs.writeFileSync "#{build_dir}/style.css", css
 
 task 'edit', 'Run ImpactJS\'s editor, Weltmeister', ->
   server ->
