@@ -6,6 +6,9 @@ stylus = require 'stylus'
 {exec} = require 'child_process'
 build_dir = 'impact'
 
+String::endsWith = (suffix) ->
+  @indexOf(suffix, @length - suffix.length) isnt -1
+
 handle_errors = (err, stdout, stderr) ->
   if err
     console.log stdout + stderr
@@ -36,6 +39,7 @@ task 'build', 'Create compiled HTML/CSS output', ->
 
   console.log 'building entities...'
   for f in fs.readdirSync 'src/entities'
+    continue if not f.endsWith '.coffee'
     console.log '  ' + f
     exec "coffee -c -o #{build_dir}/lib/game/entities src/entities/" + f, handle_errors
 
